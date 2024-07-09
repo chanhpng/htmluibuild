@@ -1,3 +1,3 @@
 module github.com/chanhpng/htmluibuild
 
-go 1.22
+go 1.22.5
