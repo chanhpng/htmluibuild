@@ -31,18 +31,18 @@ generate_log() {
     htmlui_tmp=/tmp/kopia-htmlui-src
 
     if [ ! -d "$htmlui_tmp" ]; then
-        git clone https://github.com/kopia/htmlui.git $htmlui_tmp
+        git clone https://github.com/chanhpng/htmlui.git $htmlui_tmp
     fi
 
     echo "## Changes"
     echo
-    echo "Compare: https://github.com/kopia/htmlui/compare/$htmlui_old_hash...$htmlui_new_hash"
+    echo "Compare: https://github.com/chanhpng/htmlui/compare/$htmlui_old_hash...$htmlui_new_hash"
     echo
 
-    (cd $htmlui_tmp && git fetch && git log --reverse --pretty=format:"* %ch https://github.com/kopia/htmlui/commit/%h %an %s" --no-patch $htmlui_old_hash..$htmlui_new_hash | sed -r 's@ [(]#.*$@@g')
+    (cd $htmlui_tmp && git fetch && git log --reverse --pretty=format:"* %ch https://github.com/chanhpng/htmlui/commit/%h %an %s" --no-patch $htmlui_old_hash..$htmlui_new_hash | sed -r 's@ [(]#.*$@@g')
     echo
     echo
-    echo "*This PR description was [auto-generated](https://github.com/kopia/htmluibuild/blob/main/.github/workflows/after-push.yaml) at $(date)*"
+    echo "*This PR description was [auto-generated](https://github.com/chanhpng/htmluibuild/blob/main/.github/workflows/after-push.yaml) at $(date)*"
 }
 
 generate_log $htmlui_old_hash $htmlui_new_hash > /tmp/pr-body.txt
@@ -51,7 +51,7 @@ pr_title="feat(ui): upgraded htmlui to the latest version"
 cd $kopia_tmp
 
 git checkout -B htmlui-update
-go get github.com/kopia/htmluibuild@$htmluibuild_new_hash
+go get github.com/chanhpng/htmluibuild@$htmluibuild_new_hash
 go mod tidy
 git add -A 
 git -c "user.name=Kopia Builder" -c "user.email=builder@kopia.io" commit -m "$pr_title"

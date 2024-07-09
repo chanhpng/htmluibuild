@@ -1,3 +1,3 @@
-module github.com/kopia/htmluibuild
+module github.com/chanhpng/htmluibuild
 
-go 1.21
+go 1.22
